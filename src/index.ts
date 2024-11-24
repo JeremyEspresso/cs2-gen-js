@@ -1,95 +1,47 @@
-import { CEconItemPreviewDataBlock } from "./proto/generated/CEconItemPreviewDataBlock";
+import { CEconItemPreviewDataBlock, ICEconItemPreviewDataBlock } from "./proto/generated/CEconItemPreviewDataBlock";
 import crc32 from 'crc';
 
-export function createInpsectLink(
-    accountId?: number,
-    itemId?: number,
-    defIndex?: number,
-    paintIndex?: number,
-    rarity?: number,
-    quality?: number,
-    paintWear?: number,
-    paintSeed?: number,
-    killEaterScoreType?: number,
-    killEaterValue?: number,
-    customName?: string,
-    stickers?: CEconItemPreviewDataBlock.ISticker[],
-    inventory?: number,
-    origin?: number,
-    questId?: number,
-    dropReason?: number,
-    musicIndex?: number,
-    entIndex?: number,
-    petIndex?: number,
-    keychains?: CEconItemPreviewDataBlock.ISticker[],
-  ): string {
-    return `${CsActionFunction} ${createInpsectLinkRawData(
-        accountId, 
-        itemId, 
-        defIndex, 
-        paintIndex, 
-        rarity, 
-        quality, 
-        paintWear, 
-        paintSeed, 
-        killEaterScoreType, 
-        killEaterValue, 
-        customName, stickers, 
-        inventory, 
-        origin, 
-        questId, 
-        dropReason, 
-        musicIndex, 
-        entIndex, 
-        petIndex, 
-        keychains)}`;
+const KeychainDefIndex: number = 1355;
+const StickerDefIndex: number = 1209;
+
+export function generateStickerInspectLink(stickerId: number, rarity: number): string {  
+  const stickers = [CEconItemPreviewDataBlock.Sticker.create(
+    {
+      slot: 0,
+      stickerId: stickerId
+    })];
+
+    return createInpsectLink({
+      defindex: StickerDefIndex,
+      rarity: rarity,
+      quality: 4,
+      stickers: stickers
+    });
 }
 
-export function createInpsectLinkRawData(
-    accountId?: number,
-    itemId?: number,
-    defIndex?: number,
-    paintIndex?: number,
-    rarity?: number,
-    quality?: number,
-    paintWear?: number,
-    paintSeed?: number,
-    killEaterScoreType?: number,
-    killEaterValue?: number,
-    customName?: string,
-    stickers?: CEconItemPreviewDataBlock.ISticker[],
-    inventory?: number,
-    origin?: number,
-    questId?: number,
-    dropReason?: number,
-    musicIndex?: number,
-    entIndex?: number,
-    petIndex?: number,
-    keychains?: CEconItemPreviewDataBlock.ISticker[],
-  ): string {
-    const proto = CEconItemPreviewDataBlock.create({
-        accountid: accountId,
-        itemid: itemId,
-        defindex: defIndex,
-        paintindex: paintIndex,
-        rarity: rarity,
-        quality: quality,
-        paintwear: paintWear,
-        paintseed: paintSeed,
-        killeaterscoretype: killEaterScoreType,
-        killeatervalue: killEaterValue,
-        customname: customName,
-        stickers: stickers,
-        inventory: inventory,
-        origin: origin,
-        questid: questId,
-        dropreason: dropReason,
-        musicindex: musicIndex,
-        entindex: entIndex,
-        petindex: petIndex,
-        keychains: keychains,
-      });
+export function generateKeychainInspectLink(keychainId: number, pattern: number, rarity: number): string {  
+  const keychains = [CEconItemPreviewDataBlock.Sticker.create(
+    {
+      slot: 0,
+      stickerId: keychainId,
+      pattern: pattern
+    })];
 
+    return createInpsectLink({
+      defindex: KeychainDefIndex,
+      rarity: rarity,
+      quality: 4,
+      paintseed: pattern,
+      keychains: keychains
+    });
+}
+
+export function createInpsectLink(properties?: ICEconItemPreviewDataBlock): string {
+    return `${CsActionFunction} ${createInpsectLinkRawData(properties)}`;
+}
+
+export function createInpsectLinkRawData(properties?: ICEconItemPreviewDataBlock): string {
+    const proto = CEconItemPreviewDataBlock.create(properties);
     const encodedProto = CEconItemPreviewDataBlock.encode(proto).finish();
    
     const buffer = Buffer.from(new Uint8Array(1 + encodedProto.length));
