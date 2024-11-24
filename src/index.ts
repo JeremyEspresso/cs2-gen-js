@@ -4,6 +4,8 @@ import crc32 from 'crc';
 const KeychainDefIndex: number = 1355;
 const StickerDefIndex: number = 1209;
 
+export * from "./proto/generated/CEconItemPreviewDataBlock";
+
 export function generateStickerInspectLink(stickerId: number, rarity: number): string {  
   const stickers = [CEconItemPreviewDataBlock.Sticker.create(
     {
