@@ -1,0 +1,29 @@
+{
+  "name": "cs2gen",
+  "version": "0.0.1",
+  "homepage": "https://github.com/JeremyEspresso/cs2-gen-js",
+  "repository": {
+    "url": "https://github.com/JeremyEspresso/cs2-gen-js"
+  },
+  "description": "Generating Counter-Strike inspect links on the fly",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsup"
+  },
+  "author": "jeremyespresso",
+  "license": "MIT",
+  "devDependencies": {
+    "@swc/core": "^1.9.3",
+    "@types/node": "^22.9.3",
+    "ts-protoc-gen": "^0.15.0",
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.2"
+  },
+  "dependencies": {
+    "buffer": "^6.0.3",
+    "crc": "^4.3.2",
+    "protobufjs": "^7.4.0"
+  }
+}
