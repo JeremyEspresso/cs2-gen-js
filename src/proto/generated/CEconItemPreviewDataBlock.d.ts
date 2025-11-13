@@ -62,6 +62,15 @@ export interface ICEconItemPreviewDataBlock {
 
     /** CEconItemPreviewDataBlock keychains */
     keychains?: (CEconItemPreviewDataBlock.ISticker[]|null);
+
+    /** CEconItemPreviewDataBlock style */
+    style?: (number|null);
+
+    /** CEconItemPreviewDataBlock variations */
+    variations?: (CEconItemPreviewDataBlock.ISticker[]|null);
+
+    /** CEconItemPreviewDataBlock upgradeLevel */
+    upgradeLevel?: (number|null);
 }
 
 /** Represents a CEconItemPreviewDataBlock. */
@@ -132,6 +141,15 @@ export class CEconItemPreviewDataBlock implements ICEconItemPreviewDataBlock {
 
     /** CEconItemPreviewDataBlock keychains. */
     public keychains: CEconItemPreviewDataBlock.ISticker[];
+
+    /** CEconItemPreviewDataBlock style. */
+    public style: number;
+
+    /** CEconItemPreviewDataBlock variations. */
+    public variations: CEconItemPreviewDataBlock.ISticker[];
+
+    /** CEconItemPreviewDataBlock upgradeLevel. */
+    public upgradeLevel: number;
 
     /**
      * Creates a new CEconItemPreviewDataBlock instance using the specified properties.
@@ -245,6 +263,12 @@ export namespace CEconItemPreviewDataBlock {
 
         /** Sticker pattern */
         pattern?: (number|null);
+
+        /** Sticker highlightReel */
+        highlightReel?: (number|null);
+
+        /** Sticker wrappedSticker */
+        wrappedSticker?: (number|null);
     }
 
     /** Represents a Sticker. */
@@ -285,6 +309,12 @@ export namespace CEconItemPreviewDataBlock {
 
         /** Sticker pattern. */
         public pattern: number;
+
+        /** Sticker highlightReel. */
+        public highlightReel: number;
+
+        /** Sticker wrappedSticker. */
+        public wrappedSticker: number;
 
         /**
          * Creates a new Sticker instance using the specified properties.

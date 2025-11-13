@@ -1,13 +1,15 @@
 /*eslint-disable block-scoped-var, id-length, no-control-regex, no-magic-numbers, no-prototype-builtins, no-redeclare, no-shadow, no-var, sort-vars*/
-import * as $protobuf from "protobufjs/minimal";
+"use strict";
+
+var $protobuf = require("protobufjs/minimal");
 
 // Common aliases
-const $Reader = $protobuf.Reader, $Writer = $protobuf.Writer, $util = $protobuf.util;
+var $Reader = $protobuf.Reader, $Writer = $protobuf.Writer, $util = $protobuf.util;
 
 // Exported root namespace
-const $root = $protobuf.roots["default"] || ($protobuf.roots["default"] = {});
+var $root = $protobuf.roots["default"] || ($protobuf.roots["default"] = {});
 
-export const CEconItemPreviewDataBlock = $root.CEconItemPreviewDataBlock = (() => {
+$root.CEconItemPreviewDataBlock = (function() {
 
     /**
      * Properties of a CEconItemPreviewDataBlock.
@@ -33,6 +35,9 @@ export const CEconItemPreviewDataBlock = $root.CEconItemPreviewDataBlock = (() =
      * @property {number|null} [entindex] CEconItemPreviewDataBlock entindex
      * @property {number|null} [petindex] CEconItemPreviewDataBlock petindex
      * @property {Array.<CEconItemPreviewDataBlock.ISticker>|null} [keychains] CEconItemPreviewDataBlock keychains
+     * @property {number|null} [style] CEconItemPreviewDataBlock style
+     * @property {Array.<CEconItemPreviewDataBlock.ISticker>|null} [variations] CEconItemPreviewDataBlock variations
+     * @property {number|null} [upgradeLevel] CEconItemPreviewDataBlock upgradeLevel
      */
 
     /**
@@ -46,8 +51,9 @@ export const CEconItemPreviewDataBlock = $root.CEconItemPreviewDataBlock = (() =
     function CEconItemPreviewDataBlock(properties) {
         this.stickers = [];
         this.keychains = [];
+        this.variations = [];
         if (properties)
-            for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                 if (properties[keys[i]] != null)
                     this[keys[i]] = properties[keys[i]];
     }
@@ -213,6 +219,30 @@ export const CEconItemPreviewDataBlock = $root.CEconItemPreviewDataBlock = (() =
     CEconItemPreviewDataBlock.prototype.keychains = $util.emptyArray;
 
     /**
+     * CEconItemPreviewDataBlock style.
+     * @member {number} style
+     * @memberof CEconItemPreviewDataBlock
+     * @instance
+     */
+    CEconItemPreviewDataBlock.prototype.style = 0;
+
+    /**
+     * CEconItemPreviewDataBlock variations.
+     * @member {Array.<CEconItemPreviewDataBlock.ISticker>} variations
+     * @memberof CEconItemPreviewDataBlock
+     * @instance
+     */
+    CEconItemPreviewDataBlock.prototype.variations = $util.emptyArray;
+
+    /**
+     * CEconItemPreviewDataBlock upgradeLevel.
+     * @member {number} upgradeLevel
+     * @memberof CEconItemPreviewDataBlock
+     * @instance
+     */
+    CEconItemPreviewDataBlock.prototype.upgradeLevel = 0;
+
+    /**
      * Creates a new CEconItemPreviewDataBlock instance using the specified properties.
      * @function create
      * @memberof CEconItemPreviewDataBlock
@@ -259,7 +289,7 @@ export const CEconItemPreviewDataBlock = $root.CEconItemPreviewDataBlock = (() =
         if (message.customname != null && Object.hasOwnProperty.call(message, "customname"))
             writer.uint32(/* id 11, wireType 2 =*/90).string(message.customname);
         if (message.stickers != null && message.stickers.length)
-            for (let i = 0; i < message.stickers.length; ++i)
+            for (var i = 0; i < message.stickers.length; ++i)
                 $root.CEconItemPreviewDataBlock.Sticker.encode(message.stickers[i], writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
         if (message.inventory != null && Object.hasOwnProperty.call(message, "inventory"))
             writer.uint32(/* id 13, wireType 0 =*/104).uint32(message.inventory);
@@ -276,8 +306,15 @@ export const CEconItemPreviewDataBlock = $root.CEconItemPreviewDataBlock = (() =
         if (message.petindex != null && Object.hasOwnProperty.call(message, "petindex"))
             writer.uint32(/* id 19, wireType 0 =*/152).uint32(message.petindex);
         if (message.keychains != null && message.keychains.length)
-            for (let i = 0; i < message.keychains.length; ++i)
+            for (var i = 0; i < message.keychains.length; ++i)
                 $root.CEconItemPreviewDataBlock.Sticker.encode(message.keychains[i], writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
+        if (message.style != null && Object.hasOwnProperty.call(message, "style"))
+            writer.uint32(/* id 21, wireType 0 =*/168).uint32(message.style);
+        if (message.variations != null && message.variations.length)
+            for (var i = 0; i < message.variations.length; ++i)
+                $root.CEconItemPreviewDataBlock.Sticker.encode(message.variations[i], writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
+        if (message.upgradeLevel != null && Object.hasOwnProperty.call(message, "upgradeLevel"))
+            writer.uint32(/* id 23, wireType 0 =*/184).uint32(message.upgradeLevel);
         return writer;
     };
 
@@ -308,9 +345,9 @@ export const CEconItemPreviewDataBlock = $root.CEconItemPreviewDataBlock = (() =
     CEconItemPreviewDataBlock.decode = function decode(reader, length) {
         if (!(reader instanceof $Reader))
             reader = $Reader.create(reader);
-        let end = length === undefined ? reader.len : reader.pos + length, message = new $root.CEconItemPreviewDataBlock();
+        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CEconItemPreviewDataBlock();
         while (reader.pos < end) {
-            let tag = reader.uint32();
+            var tag = reader.uint32();
             switch (tag >>> 3) {
             case 1: {
                     message.accountid = reader.uint32();
@@ -396,6 +433,20 @@ export const CEconItemPreviewDataBlock = $root.CEconItemPreviewDataBlock = (() =
                     message.keychains.push($root.CEconItemPreviewDataBlock.Sticker.decode(reader, reader.uint32()));
                     break;
                 }
+            case 21: {
+                    message.style = reader.uint32();
+                    break;
+                }
+            case 22: {
+                    if (!(message.variations && message.variations.length))
+                        message.variations = [];
+                    message.variations.push($root.CEconItemPreviewDataBlock.Sticker.decode(reader, reader.uint32()));
+                    break;
+                }
+            case 23: {
+                    message.upgradeLevel = reader.uint32();
+                    break;
+                }
             default:
                 reader.skipType(tag & 7);
                 break;
@@ -467,8 +518,8 @@ export const CEconItemPreviewDataBlock = $root.CEconItemPreviewDataBlock = (() =
         if (message.stickers != null && message.hasOwnProperty("stickers")) {
             if (!Array.isArray(message.stickers))
                 return "stickers: array expected";
-            for (let i = 0; i < message.stickers.length; ++i) {
-                let error = $root.CEconItemPreviewDataBlock.Sticker.verify(message.stickers[i]);
+            for (var i = 0; i < message.stickers.length; ++i) {
+                var error = $root.CEconItemPreviewDataBlock.Sticker.verify(message.stickers[i]);
                 if (error)
                     return "stickers." + error;
             }
@@ -497,12 +548,27 @@ export const CEconItemPreviewDataBlock = $root.CEconItemPreviewDataBlock = (() =
         if (message.keychains != null && message.hasOwnProperty("keychains")) {
             if (!Array.isArray(message.keychains))
                 return "keychains: array expected";
-            for (let i = 0; i < message.keychains.length; ++i) {
-                let error = $root.CEconItemPreviewDataBlock.Sticker.verify(message.keychains[i]);
+            for (var i = 0; i < message.keychains.length; ++i) {
+                var error = $root.CEconItemPreviewDataBlock.Sticker.verify(message.keychains[i]);
                 if (error)
                     return "keychains." + error;
             }
         }
+        if (message.style != null && message.hasOwnProperty("style"))
+            if (!$util.isInteger(message.style))
+                return "style: integer expected";
+        if (message.variations != null && message.hasOwnProperty("variations")) {
+            if (!Array.isArray(message.variations))
+                return "variations: array expected";
+            for (var i = 0; i < message.variations.length; ++i) {
+                var error = $root.CEconItemPreviewDataBlock.Sticker.verify(message.variations[i]);
+                if (error)
+                    return "variations." + error;
+            }
+        }
+        if (message.upgradeLevel != null && message.hasOwnProperty("upgradeLevel"))
+            if (!$util.isInteger(message.upgradeLevel))
+                return "upgradeLevel: integer expected";
         return null;
     };
 
@@ -517,7 +583,7 @@ export const CEconItemPreviewDataBlock = $root.CEconItemPreviewDataBlock = (() =
     CEconItemPreviewDataBlock.fromObject = function fromObject(object) {
         if (object instanceof $root.CEconItemPreviewDataBlock)
             return object;
-        let message = new $root.CEconItemPreviewDataBlock();
+        var message = new $root.CEconItemPreviewDataBlock();
         if (object.accountid != null)
             message.accountid = object.accountid >>> 0;
         if (object.itemid != null)
@@ -551,7 +617,7 @@ export const CEconItemPreviewDataBlock = $root.CEconItemPreviewDataBlock = (() =
             if (!Array.isArray(object.stickers))
                 throw TypeError(".CEconItemPreviewDataBlock.stickers: array expected");
             message.stickers = [];
-            for (let i = 0; i < object.stickers.length; ++i) {
+            for (var i = 0; i < object.stickers.length; ++i) {
                 if (typeof object.stickers[i] !== "object")
                     throw TypeError(".CEconItemPreviewDataBlock.stickers: object expected");
                 message.stickers[i] = $root.CEconItemPreviewDataBlock.Sticker.fromObject(object.stickers[i]);
@@ -575,12 +641,26 @@ export const CEconItemPreviewDataBlock = $root.CEconItemPreviewDataBlock = (() =
             if (!Array.isArray(object.keychains))
                 throw TypeError(".CEconItemPreviewDataBlock.keychains: array expected");
             message.keychains = [];
-            for (let i = 0; i < object.keychains.length; ++i) {
+            for (var i = 0; i < object.keychains.length; ++i) {
                 if (typeof object.keychains[i] !== "object")
                     throw TypeError(".CEconItemPreviewDataBlock.keychains: object expected");
                 message.keychains[i] = $root.CEconItemPreviewDataBlock.Sticker.fromObject(object.keychains[i]);
             }
         }
+        if (object.style != null)
+            message.style = object.style >>> 0;
+        if (object.variations) {
+            if (!Array.isArray(object.variations))
+                throw TypeError(".CEconItemPreviewDataBlock.variations: array expected");
+            message.variations = [];
+            for (var i = 0; i < object.variations.length; ++i) {
+                if (typeof object.variations[i] !== "object")
+                    throw TypeError(".CEconItemPreviewDataBlock.variations: object expected");
+                message.variations[i] = $root.CEconItemPreviewDataBlock.Sticker.fromObject(object.variations[i]);
+            }
+        }
+        if (object.upgradeLevel != null)
+            message.upgradeLevel = object.upgradeLevel >>> 0;
         return message;
     };
 
@@ -596,15 +676,16 @@ export const CEconItemPreviewDataBlock = $root.CEconItemPreviewDataBlock = (() =
     CEconItemPreviewDataBlock.toObject = function toObject(message, options) {
         if (!options)
             options = {};
-        let object = {};
+        var object = {};
         if (options.arrays || options.defaults) {
             object.stickers = [];
             object.keychains = [];
+            object.variations = [];
         }
         if (options.defaults) {
             object.accountid = 0;
             if ($util.Long) {
-                let long = new $util.Long(0, 0, true);
+                var long = new $util.Long(0, 0, true);
                 object.itemid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
             } else
                 object.itemid = options.longs === String ? "0" : 0;
@@ -624,6 +705,8 @@ export const CEconItemPreviewDataBlock = $root.CEconItemPreviewDataBlock = (() =
             object.musicindex = 0;
             object.entindex = 0;
             object.petindex = 0;
+            object.style = 0;
+            object.upgradeLevel = 0;
         }
         if (message.accountid != null && message.hasOwnProperty("accountid"))
             object.accountid = message.accountid;
@@ -652,7 +735,7 @@ export const CEconItemPreviewDataBlock = $root.CEconItemPreviewDataBlock = (() =
             object.customname = message.customname;
         if (message.stickers && message.stickers.length) {
             object.stickers = [];
-            for (let j = 0; j < message.stickers.length; ++j)
+            for (var j = 0; j < message.stickers.length; ++j)
                 object.stickers[j] = $root.CEconItemPreviewDataBlock.Sticker.toObject(message.stickers[j], options);
         }
         if (message.inventory != null && message.hasOwnProperty("inventory"))
@@ -671,9 +754,18 @@ export const CEconItemPreviewDataBlock = $root.CEconItemPreviewDataBlock = (() =
             object.petindex = message.petindex;
         if (message.keychains && message.keychains.length) {
             object.keychains = [];
-            for (let j = 0; j < message.keychains.length; ++j)
+            for (var j = 0; j < message.keychains.length; ++j)
                 object.keychains[j] = $root.CEconItemPreviewDataBlock.Sticker.toObject(message.keychains[j], options);
         }
+        if (message.style != null && message.hasOwnProperty("style"))
+            object.style = message.style;
+        if (message.variations && message.variations.length) {
+            object.variations = [];
+            for (var j = 0; j < message.variations.length; ++j)
+                object.variations[j] = $root.CEconItemPreviewDataBlock.Sticker.toObject(message.variations[j], options);
+        }
+        if (message.upgradeLevel != null && message.hasOwnProperty("upgradeLevel"))
+            object.upgradeLevel = message.upgradeLevel;
         return object;
     };
 
@@ -719,6 +811,8 @@ export const CEconItemPreviewDataBlock = $root.CEconItemPreviewDataBlock = (() =
          * @property {number|null} [offsetY] Sticker offsetY
          * @property {number|null} [offsetZ] Sticker offsetZ
          * @property {number|null} [pattern] Sticker pattern
+         * @property {number|null} [highlightReel] Sticker highlightReel
+         * @property {number|null} [wrappedSticker] Sticker wrappedSticker
          */
 
         /**
@@ -731,7 +825,7 @@ export const CEconItemPreviewDataBlock = $root.CEconItemPreviewDataBlock = (() =
          */
         function Sticker(properties) {
             if (properties)
-                for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
@@ -817,6 +911,22 @@ export const CEconItemPreviewDataBlock = $root.CEconItemPreviewDataBlock = (() =
         Sticker.prototype.pattern = 0;
 
         /**
+         * Sticker highlightReel.
+         * @member {number} highlightReel
+         * @memberof CEconItemPreviewDataBlock.Sticker
+         * @instance
+         */
+        Sticker.prototype.highlightReel = 0;
+
+        /**
+         * Sticker wrappedSticker.
+         * @member {number} wrappedSticker
+         * @memberof CEconItemPreviewDataBlock.Sticker
+         * @instance
+         */
+        Sticker.prototype.wrappedSticker = 0;
+
+        /**
          * Creates a new Sticker instance using the specified properties.
          * @function create
          * @memberof CEconItemPreviewDataBlock.Sticker
@@ -860,6 +970,10 @@ export const CEconItemPreviewDataBlock = $root.CEconItemPreviewDataBlock = (() =
                 writer.uint32(/* id 9, wireType 5 =*/77).float(message.offsetZ);
             if (message.pattern != null && Object.hasOwnProperty.call(message, "pattern"))
                 writer.uint32(/* id 10, wireType 0 =*/80).uint32(message.pattern);
+            if (message.highlightReel != null && Object.hasOwnProperty.call(message, "highlightReel"))
+                writer.uint32(/* id 11, wireType 0 =*/88).uint32(message.highlightReel);
+            if (message.wrappedSticker != null && Object.hasOwnProperty.call(message, "wrappedSticker"))
+                writer.uint32(/* id 12, wireType 0 =*/96).uint32(message.wrappedSticker);
             return writer;
         };
 
@@ -890,9 +1004,9 @@ export const CEconItemPreviewDataBlock = $root.CEconItemPreviewDataBlock = (() =
         Sticker.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            let end = length === undefined ? reader.len : reader.pos + length, message = new $root.CEconItemPreviewDataBlock.Sticker();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CEconItemPreviewDataBlock.Sticker();
             while (reader.pos < end) {
-                let tag = reader.uint32();
+                var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1: {
                         message.slot = reader.uint32();
@@ -932,6 +1046,14 @@ export const CEconItemPreviewDataBlock = $root.CEconItemPreviewDataBlock = (() =
                     }
                 case 10: {
                         message.pattern = reader.uint32();
+                        break;
+                    }
+                case 11: {
+                        message.highlightReel = reader.uint32();
+                        break;
+                    }
+                case 12: {
+                        message.wrappedSticker = reader.uint32();
                         break;
                     }
                 default:
@@ -999,6 +1121,12 @@ export const CEconItemPreviewDataBlock = $root.CEconItemPreviewDataBlock = (() =
             if (message.pattern != null && message.hasOwnProperty("pattern"))
                 if (!$util.isInteger(message.pattern))
                     return "pattern: integer expected";
+            if (message.highlightReel != null && message.hasOwnProperty("highlightReel"))
+                if (!$util.isInteger(message.highlightReel))
+                    return "highlightReel: integer expected";
+            if (message.wrappedSticker != null && message.hasOwnProperty("wrappedSticker"))
+                if (!$util.isInteger(message.wrappedSticker))
+                    return "wrappedSticker: integer expected";
             return null;
         };
 
@@ -1013,7 +1141,7 @@ export const CEconItemPreviewDataBlock = $root.CEconItemPreviewDataBlock = (() =
         Sticker.fromObject = function fromObject(object) {
             if (object instanceof $root.CEconItemPreviewDataBlock.Sticker)
                 return object;
-            let message = new $root.CEconItemPreviewDataBlock.Sticker();
+            var message = new $root.CEconItemPreviewDataBlock.Sticker();
             if (object.slot != null)
                 message.slot = object.slot >>> 0;
             if (object.stickerId != null)
@@ -1034,6 +1162,10 @@ export const CEconItemPreviewDataBlock = $root.CEconItemPreviewDataBlock = (() =
                 message.offsetZ = Number(object.offsetZ);
             if (object.pattern != null)
                 message.pattern = object.pattern >>> 0;
+            if (object.highlightReel != null)
+                message.highlightReel = object.highlightReel >>> 0;
+            if (object.wrappedSticker != null)
+                message.wrappedSticker = object.wrappedSticker >>> 0;
             return message;
         };
 
@@ -1049,7 +1181,7 @@ export const CEconItemPreviewDataBlock = $root.CEconItemPreviewDataBlock = (() =
         Sticker.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
-            let object = {};
+            var object = {};
             if (options.defaults) {
                 object.slot = 0;
                 object.stickerId = 0;
@@ -1061,6 +1193,8 @@ export const CEconItemPreviewDataBlock = $root.CEconItemPreviewDataBlock = (() =
                 object.offsetY = 0;
                 object.offsetZ = 0;
                 object.pattern = 0;
+                object.highlightReel = 0;
+                object.wrappedSticker = 0;
             }
             if (message.slot != null && message.hasOwnProperty("slot"))
                 object.slot = message.slot;
@@ -1082,6 +1216,10 @@ export const CEconItemPreviewDataBlock = $root.CEconItemPreviewDataBlock = (() =
                 object.offsetZ = options.json && !isFinite(message.offsetZ) ? String(message.offsetZ) : message.offsetZ;
             if (message.pattern != null && message.hasOwnProperty("pattern"))
                 object.pattern = message.pattern;
+            if (message.highlightReel != null && message.hasOwnProperty("highlightReel"))
+                object.highlightReel = message.highlightReel;
+            if (message.wrappedSticker != null && message.hasOwnProperty("wrappedSticker"))
+                object.wrappedSticker = message.wrappedSticker;
             return object;
         };
 
@@ -1117,4 +1255,4 @@ export const CEconItemPreviewDataBlock = $root.CEconItemPreviewDataBlock = (() =
     return CEconItemPreviewDataBlock;
 })();
 
-export { $root as default };
+module.exports = $root;

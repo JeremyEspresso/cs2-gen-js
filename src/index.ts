@@ -21,12 +21,13 @@ export function generateStickerInspectLink(stickerId: number, rarity: number): s
     });
 }
 
-export function generateKeychainInspectLink(keychainId: number, pattern: number, rarity: number): string {  
+export function generateKeychainInspectLink(keychainId: number, pattern: number, rarity: number, wrappedStickerId: number | null): string {  
   const keychains = [CEconItemPreviewDataBlock.Sticker.create(
     {
       slot: 0,
       stickerId: keychainId,
-      pattern: pattern
+      pattern: pattern,
+      wrappedSticker: wrappedStickerId
     })];
 
     return createInpsectLink({
